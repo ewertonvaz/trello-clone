@@ -29,56 +29,17 @@
 </template>
 <script>
 import ColumnTask from '@/components/ColumnTask'
+import MovingTasksAndColumnsMixin from '@/mixins/MovingTasksAndColumnsMixin'
+
 export default {
-  components: {
-    ColumnTask
-  },
-  props: {
-    column: {
-      type: Object,
-      required: true
-    },
-    columnIndex: {
-      type: Number,
-      required: true
-    },
-    board: {
-      type: Object,
-      required: true
-    }
-  },
+  components: { ColumnTask },
+  mixins: [MovingTasksAndColumnsMixin],
   methods: {
-    moveTaskOrColumn (e, toTasks, toColumnIndex, toTaskIndex) {
-      const type = e.dataTransfer.getData('type')
-      if (type === 'task') {
-        this.moveTask(e, toTasks, toTaskIndex !== undefined ? toTaskIndex : toTasks.lenght)
-      } else {
-        this.moveColumn(e, toColumnIndex)
-      }
-    },
     pickupColumn (e, columnFromId) {
       e.dataTransfer.effectAllowed = 'move'
       e.dataTransfer.dropEffect = 'move'
       e.dataTransfer.setData('column-id', columnFromId)
       e.dataTransfer.setData('type', 'column')
-    },
-    moveTask (e, toTasks, toTaskIndex) {
-      const fromColumnIndex = e.dataTransfer.getData('column-id')
-      const fromTaskIndex = e.dataTransfer.getData('task-id')
-      const fromTasks = this.board.columns[fromColumnIndex].tasks
-      this.$store.commit('MOVE_TASK', {
-        fromTasks,
-        fromTaskIndex,
-        toTasks,
-        toTaskIndex
-      })
-    },
-    moveColumn (e, toColumnIndex) {
-      const fromColumnIndex = e.dataTransfer.getData('column-id')
-      this.$store.commit('MOVE_COLUMN', {
-        fromColumnIndex,
-        toColumnIndex
-      })
     },
     createTask (e, tasks) {
       this.$store.commit('CREATE_TASK', {
