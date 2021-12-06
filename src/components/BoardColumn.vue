@@ -1,11 +1,15 @@
 <template>
+  <AppDrag
+    :transferData="{
+      type: 'column',
+      fromColumnsIndex: columnIndex
+    }"
+  >
     <div
     class="column"
-    draggable
     @drop="moveTaskOrColumn($event, column.tasks, columnIndex)"
     @dragover.prevent
     @dragenter.prevent
-    @dragstart.self="pickupColumn($event, columnIndex)"
     >
         <div class="flex justify-center mb-2 font-bold uppercase">{{column.name}}</div>
         <div class="list-reset">
@@ -26,13 +30,16 @@
           />
         </div>
     </div>
+  </AppDrag>
 </template>
 <script>
 import ColumnTask from '@/components/ColumnTask'
+import AppDrag from '@/components/AppDrag'
+import AppDrop from '@/components/AppDrop'
 import MovingTasksAndColumnsMixin from '@/mixins/MovingTasksAndColumnsMixin'
 
 export default {
-  components: { ColumnTask },
+  components: { ColumnTask, AppDrag, AppDrop },
   mixins: [MovingTasksAndColumnsMixin],
   methods: {
     pickupColumn (e, columnFromId) {
