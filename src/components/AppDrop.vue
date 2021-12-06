@@ -1,6 +1,6 @@
 <template>
     <div
-        @drop.self="onDrop()"
+        @drop.stop="onDrop"
         @dragover.prevent
         @dragenter.prevent
     >
@@ -9,16 +9,11 @@
 </template>
 <script>
 export default {
-    props: {
-        transferData: {
-            type: Object,
-            required: true
-        }
-    },
-    methods: {
-        onDrop (e){
-            e.dataTansfer.set('payload', JSON.stringify(this.transferData))
-        }
+  methods: {
+    onDrop (e) {
+      const transferData = JSON.parse(e.dataTransfer.getData('payload'))
+      this.$emit('drop', transferData)
     }
+  }
 }
 </script>

@@ -1,15 +1,13 @@
 <template>
-  <AppDrag
-    :transferData="{
-      type: 'column',
-      fromColumnsIndex: columnIndex
-    }"
+  <AppDrop
+    @drop="moveTaskOrColumn"
   >
-    <div
-    class="column"
-    @drop="moveTaskOrColumn($event, column.tasks, columnIndex)"
-    @dragover.prevent
-    @dragenter.prevent
+    <AppDrag
+      class="column"
+      :transferData="{
+        type: 'column',
+        fromColumnIndex: columnIndex
+      }"
     >
         <div class="flex justify-center mb-2 font-bold uppercase">{{column.name}}</div>
         <div class="list-reset">
@@ -29,8 +27,8 @@
             @keyup.enter="createTask($event, column.tasks)"
           />
         </div>
-    </div>
-  </AppDrag>
+    </AppDrag>
+  </AppDrop>
 </template>
 <script>
 import ColumnTask from '@/components/ColumnTask'
