@@ -32,3 +32,5 @@ yarn run lint
 
 ### Configuração customizada do vue-cli
 Consultar [Configuration Reference](https://cli.vuejs.org/config/).
+
+--
