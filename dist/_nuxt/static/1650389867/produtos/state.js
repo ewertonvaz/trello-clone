@@ -1,1 +1,0 @@
-window.__NUXT__={staticAssetsBase:"\u002F_nuxt\u002Fstatic\u002F1650389867",layout:"no-nav",error:{statusCode:503,message:"Não foi possível obter os dados, por favor tente novamente mais tarde"},state:{user:{}},serverRendered:false,routePath:"\u002Fprodutos",config:{_app:{basePath:"\u002F",assetsPath:"\u002F_nuxt\u002F",cdnURL:null}}};
